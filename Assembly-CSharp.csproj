@@ -46,7 +46,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Blast.cs" />
+     <Compile Include="Assets\Scripts\BlastMovement.cs" />
+     <Compile Include="Assets\Scripts\BlastTransform.cs" />
+     <Compile Include="Assets\Scripts\BlastTriumph.cs" />
      <Compile Include="Assets\Scripts\DeleteAfterSomeTime.cs" />
+     <Compile Include="Assets\Scripts\KillZoneCollision.cs" />
      <Compile Include="Assets\Scripts\RogueAttack.cs" />
      <Compile Include="Assets\Scripts\RogueMovement.cs" />
  <Reference Include="UnityEngine.UI">

@@ -43,6 +43,16 @@ public class RogueMovement : MonoBehaviour
 	/// </summary>
 	private Vector3 movementVector;
 
+	/// <summary>
+	/// The horizontal bounds.
+	/// </summary>
+	private float horizontalBounds;
+
+	/// <summary>
+	/// The vertical bounds.
+	/// </summary>
+	private float verticalBounds;
+
 	#endregion
 
 	#region Unity methods
@@ -52,13 +62,18 @@ public class RogueMovement : MonoBehaviour
 		movementVector = Vector3.zero;
 		horizontalSpeed = 0f;
 		verticalSpeed = 0f;
+
+		horizontalBounds = Camera.main.orthographicSize * Screen.width / Screen.height;
+		verticalBounds = Camera.main.orthographicSize;
 	}
 
 	private void Update()
-	{
+	{	
+		//Figure out bounding all four positions.
+		var inBounds = InBounds(0, horizontalBounds);
 		var h = Input.GetAxisRaw("Horizontal");
 		var v = Input.GetAxisRaw("Vertical");
-
+		h = inBounds ? h : - 4f;
 		horizontalSpeed = GetSpeed(h, horizontalSpeed);
 		verticalSpeed = GetSpeed(v, verticalSpeed);
 
@@ -105,5 +120,23 @@ public class RogueMovement : MonoBehaviour
 			}
 		}
 		return result;
+	}
+
+	/// <summary>
+	/// Ins the bounds.
+	/// </summary>
+	/// <returns><c>true</c>, if bounds was ined, <c>false</c> otherwise.</returns>
+	/// <param name="axis">Axis.</param>
+	/// <param name="bound">Bound.</param>
+	bool InBounds(float axis, float bound)
+	{
+		if(transform.position.x > bound + 1f)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }
